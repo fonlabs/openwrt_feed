@@ -13,6 +13,11 @@ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 # SCons supports parallel builds but does not support make's jobserver
 MAKE_J:=-j$(CONFIG_PKG_BUILD_JOBS)
 
+ifneq ($(CONFIG_CCACHE),)
+  TARGET_CC=$(TARGET_CC_NOCACHE)
+  TARGET_CXX=$(TARGET_CXX_NOCACHE)
+endif
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/$(PKG_NAME)
