@@ -156,6 +156,7 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/cpp/inc/qcc/*.h $(1)/usr/include/qcc/
 	$(CP) $(PKG_INSTALL_DIR)/cpp/inc/qcc/posix/*.h $(1)/usr/include/qcc/posix/
 	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/cpp/lib/libajrouter.a $(1)/usr/lib/
 	$(CP) $(PKG_INSTALL_DIR)/cpp/lib/liballjoyn.a $(1)/usr/lib/
 	$(CP) $(PKG_INSTALL_DIR)/cpp/lib/liballjoyn.so $(1)/usr/lib/
 ifdef CONFIG_PACKAGE_alljoyn-about
