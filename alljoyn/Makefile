@@ -161,9 +161,9 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/cpp/lib/liballjoyn.so $(1)/usr/lib/
 ifdef CONFIG_PACKAGE_alljoyn-about
 	$(INSTALL_DIR) $(1)/usr/include/alljoyn/about
-	$(CP) $(PKG_INSTALL_DIR)/cpp/inc/alljoyn/about/*.h $(1)/usr/include/alljoyn/about
-	$(CP) $(PKG_INSTALL_DIR)/cpp/lib/liballjoyn_about.a $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/cpp/lib/liballjoyn_about.so $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/about/inc/alljoyn/about/*.h $(1)/usr/include/alljoyn/about
+	$(CP) $(PKG_INSTALL_DIR)/about/lib/liballjoyn_about.a $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/about/lib/liballjoyn_about.so $(1)/usr/lib/
 endif
 ifdef CONFIG_PACKAGE_alljoyn-c
 	$(INSTALL_DIR) $(1)/usr/include/alljoyn_c
@@ -209,7 +209,7 @@ endef
 
 define Package/alljoyn-about/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/cpp/lib/liballjoyn_about.so $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/about/lib/liballjoyn_about.so $(1)/usr/lib/
 endef
 
 define Package/alljoyn-samples/install
