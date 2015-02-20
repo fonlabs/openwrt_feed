@@ -3,11 +3,12 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=alljoyn-lighting-service_framework
 PKG_VERSION:=14.06.00
-PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)-src
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-src.tar.gz
-PKG_SOURCE_URL:=https://git.allseenalliance.org/gerrit/lighting/service_framework
+
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_VERSION:=6915aadc97e494f059a1e5c9293521f608029b8e
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_URL:=https://github.com/fonlabs/service_framework
+PKG_SOURCE_VERSION:=51b38aabc17d6fd0dc5bdbf5b5dc05410d134926
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 # SCons supports parallel builds but does not support make's jobserver
 MAKE_J:=-j$(CONFIG_PKG_BUILD_JOBS)
@@ -47,9 +48,10 @@ define Build/Configure/Default
 endef
 
 define Build/Compile
-	scons -C $(PKG_BUILD_DIR)/lighting/service_framework/ \
+	scons -C $(PKG_BUILD_DIR)/ \
 		$(PKG_JOBS) \
 		WS=off \
+		V=1 \
 		CPU=openwrt \
 		OS=openwrt \
 		"BINDINGS=$(ALLJOYN_BINDINGS)" \
