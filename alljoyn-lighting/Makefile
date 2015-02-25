@@ -7,7 +7,7 @@ PKG_VERSION:=14.06.00
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_URL:=https://github.com/fonlabs/service_framework
-PKG_SOURCE_VERSION:=51b38aabc17d6fd0dc5bdbf5b5dc05410d134926
+PKG_SOURCE_VERSION:=252743190461543dbdb476c3c6cd799714747173
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
 
 # SCons supports parallel builds but does not support make's jobserver
@@ -15,13 +15,11 @@ MAKE_J:=-j$(CONFIG_PKG_BUILD_JOBS)
 
 include $(INCLUDE_DIR)/package.mk
 
-ALLJOYN_BINDINGS:=cpp,
-
 define Package/$(PKG_NAME)
   TITLE:=AllJoyn Lighting service library
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=alljoyn
+  DEPENDS:=alljoyn +alljoyn-about +alljoyn-config +alljoyn-notification +alljoyn-services_common
   URL:=http://www.allseenalliance.org
   MAINTAINER:=AllSeen Alliance <allseen-core@lists.allseenalliance.org>
   MENU:=1
@@ -38,7 +36,7 @@ else
 endif
 
 
-PKG_INSTALL_DIR:=$(PKG_BUILD_DIR)/services/base/$(AJ_SERVICE)/build/openwrt/openwrt/$(ALLJOYN_BUILD_VARIANT)/dist/$(AJ_SERVICE)
+PKG_INSTALL_DIR:=$(PKG_BUILD_DIR)/build/openwrt/openwrt/$(ALLJOYN_BUILD_VARIANT)/dist/cpp
 
 TARGET_CFLAGS+=-fPIC
 TARGET_CPPFLAGS+=-fPIC
@@ -54,7 +52,6 @@ define Build/Compile
 		V=1 \
 		CPU=openwrt \
 		OS=openwrt \
-		"BINDINGS=$(ALLJOYN_BINDINGS)" \
 		"VARIANT=$(ALLJOYN_BUILD_VARIANT)" \
 		BR=off \
 		BT=off \
@@ -73,16 +70,15 @@ endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/alljoyn/
-	$(CP) $(PKG_INSTALL_DIR)/inc/alljoyn/$(AJ_SERVICE)/*.h $(1)/usr/include/alljoyn/$(AJ_SERVICE)
+	$(CP) $(PKG_INSTALL_DIR)/inc/* $(1)/usr/include/
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/lib/liballjoyn_$(AJ_SERVICE).a $(1)/usr/lib/
-	$(CP) $(PKG_INSTALL_DIR)/lib/liballjoyn_$(AJ_SERVICE).so $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/lib/* $(1)/usr/lib/
 endef
 
 
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/lib
-	$(CP) $(PKG_INSTALL_DIR)/lib/liballjoyn_$(AJ_SERVICE).so $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/lib/*.so $(1)/usr/lib/
 endef
 
 
