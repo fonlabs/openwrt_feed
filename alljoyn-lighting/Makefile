@@ -22,7 +22,6 @@ define Package/$(PKG_NAME)
   DEPENDS:=alljoyn +alljoyn-about +alljoyn-config +alljoyn-notification +alljoyn-services_common
   URL:=http://www.allseenalliance.org
   MAINTAINER:=AllSeen Alliance <allseen-core@lists.allseenalliance.org>
-  MENU:=1
 endef
 
 define Package/$(PKG_NAME)/description
@@ -73,6 +72,8 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/inc/* $(1)/usr/include/
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/lib/* $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(PKG_INSTALL_DIR)/bin/* $(1)/usr/bin/
 endef
 
 
