@@ -77,14 +77,14 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/inc/* $(1)/usr/include/
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/lib/* $(1)/usr/lib/
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(CP) $(PKG_INSTALL_DIR)/bin/* $(1)/usr/bin/
 endef
 
 
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/lib/*.so $(1)/usr/lib/
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(PKG_INSTALL_DIR)/bin/* $(1)/usr/bin/
 endef
 
 
