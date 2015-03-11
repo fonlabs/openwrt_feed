@@ -101,5 +101,23 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_BIN) ./files/lighting.init $(1)/etc/init.d/lighting
 endef
 
+define Package/$(PKG_NAME)/postinst
+#!/bin/sh
+if [ -z "$${IPKG_INSTROOT}" ]; then
+    . /etc/uci-defaults/lighting
+    rm -f /etc/uci-defaults/lighting
+fi
+exit 0
+endef
+
+define Package/$(PKG_NAME)/prerm
+#!/bin/sh
+if [ -z "$${IPKG_INSTROOT}" ]; then
+    /etc/init.d/lighting stop
+    /etc/init.d/lighting disable
+fi
+exit 0
+endef
+
 
 $(eval $(call BuildPackage,$(PKG_NAME)))

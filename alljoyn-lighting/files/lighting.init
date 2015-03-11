@@ -40,7 +40,7 @@ generate_conf_tree() {
     config_get manufacturer system manufacturerInfo "Manufacturer"
     config_get supporturl system supportURL "http://support.example.org/"
     config_get appid service appid "http://support.example.org/"
-    cat > $GENCONFIGFILE <<EOF
+    cat > $CONFIGFILE <<EOF
 AJSoftwareVersion = v14.12.00a
 AppId = ${appid}
 AppName = LightingControllerService
@@ -57,23 +57,25 @@ EOF
 
 
 start() {
-    local debug
+    local enable_logging
 
     generate_conf_tree
 
     config_load lighting
-    config_get_bool debug lighting debug
-    if [ debug -eq 1 ]; then
+    config_get_bool enable_logging lighting debug
+    if [ $enable_logging -eq 1 ]; then
         DEBUG=-l
     else
         DEBUG=''
     fi
 
     if [ -e $CONFIGFILE ]; then
-        service_start /usr/bin/lighting_controller_service $DEBUG -f -k $CONFIGDIR
+        service_start /usr/bin/lighting_controller_service $DEBUG -k $CONFIGDIR
     else
         debug "$CONFIGFILE not present and could not be generated!"
     fi
 }
 
-stop() { service_stop /usr/bin/lighting_controller_service }
+stop() {
+    service_stop /usr/bin/lighting_controller_service
+}
