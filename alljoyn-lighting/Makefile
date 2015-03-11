@@ -79,12 +79,26 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/lib/* $(1)/usr/lib/
 endef
 
+define Package/$(PKG_NAME)/conffiles
+/etc/alljoyn/lighting/OEMConfig.ini
+/etc/alljoyn/lighting/MasterScenes.lsf
+/etc/alljoyn/lighting/Scenes.lsf
+/etc/alljoyn/lighting/LampGroups.lsf
+/etc/alljoyn/lighting/Presets.lsf
+endef
+
 
 define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/lib/*.so $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(CP) $(PKG_INSTALL_DIR)/bin/* $(1)/usr/bin/
+	$(INSTALL_DIR) $(1)/etc/config
+	$(INSTALL_CONF) ./files/lighting.config $(1)/etc/config/lighting
+	$(INSTALL_DIR) $(1)/etc/uci-defaults
+	$(INSTALL_BIN) ./files/lighting.defaults $(1)/etc/uci-defaults/lighting
+	$(INSTALL_DIR) $(1)/etc/init.d
+	$(INSTALL_BIN) ./files/lighting.init $(1)/etc/init.d/lighting
 endef
 
 

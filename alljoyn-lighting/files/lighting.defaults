@@ -1,0 +1,3 @@
+#! /bin/sh
+/etc/init.d/lighting enable
+exit 0
