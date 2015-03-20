@@ -1,0 +1,25 @@
+Index: alljoyn-lighting-service_framework-14.12.00/standard_core_library/lighting_controller_service/src/Main.cc
+===================================================================
+--- alljoyn-lighting-service_framework-14.12.00.orig/standard_core_library/lighting_controller_service/src/Main.cc	2015-03-15 22:58:32.000000000 +0100
++++ alljoyn-lighting-service_framework-14.12.00/standard_core_library/lighting_controller_service/src/Main.cc	2015-03-18 14:55:55.220944414 +0100
+@@ -48,13 +48,13 @@
+     }
+ }
+
+-static std::string factoryConfigFile = "OEMConfig.ini";
+-static std::string configFile = "Config.ini";
+-static std::string lampGroupFile = "LampGroups.lsf";
+-static std::string presetFile = "Presets.lsf";
+-static std::string sceneFile = "Scenes.lsf";
+-static std::string masterSceneFile = "MasterScenes.lsf";
+-static std::string storeFile = "LightingControllerService";
++static std::string factoryConfigFile = "/etc/allplay/lighting/OEMConfig.ini";
++static std::string configFile = "/etc/allplay/lighting/Config.ini";
++static std::string lampGroupFile = "/etc/allplay/lighting/LampGroups.lsf";
++static std::string presetFile = "/etc/allplay/lighting/Presets.lsf";
++static std::string sceneFile = "/etc/allplay/lighting/Scenes.lsf";
++static std::string masterSceneFile = "/etc/allplay/lighting/MasterScenes.lsf";
++static std::string storeFile = "/etc/allplay/lighting/LightingControllerService";
+ static std::string factoryConfigFilePath = factoryConfigFile;
+ static std::string configFilePath = configFile;
+ static std::string lampGroupFilePath = lampGroupFile;

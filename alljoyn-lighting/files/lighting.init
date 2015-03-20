@@ -17,8 +17,6 @@
 
 START=65
 
-SERVICE_PID_FILE=/var/run/alljoyn.pid
-
 CONFIGDIR=/etc/alljoyn/lighting
 CONFIGFILE=$CONFIGDIR/OEMConfig.ini
 
@@ -70,12 +68,12 @@ start() {
     fi
 
     if [ -e $CONFIGFILE ]; then
-        service_start /usr/bin/lighting_controller_service $DEBUG -k $CONFIGDIR
+        /usr/bin/lighting_controller_service $DEBUG
     else
         debug "$CONFIGFILE not present and could not be generated!"
     fi
 }
 
 stop() {
-    service_stop /usr/bin/lighting_controller_service
+    killall lighting_controller_service
 }
