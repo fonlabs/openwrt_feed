@@ -57,8 +57,11 @@ process_ip_network() {
     local network="$1"
     local port="$2"
     local ifname
+    local type
 
     config_get ifname "$network" ifname
+    config_get type "$network" type
+    [ "$type" = "bridge" ] && ifname=br-$network
     if [ -n "$ifname" ]; then
         export ${NO_EXPORT:+-n} listen_specs="${listen_specs}
   <listen>tcp:iface=${ifname},port=${port}</listen>
